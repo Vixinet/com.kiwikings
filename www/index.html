@@ -1,0 +1,119 @@
+<html>
+	<head>
+		<title>KIWIKINGS</title>
+		<style>
+			body {
+				background : #e7e0d8;
+				overflow : hidden;
+				/* background : url('ground.png') bottom center no-repeat; */
+			}
+			/*
+
+			img.logo {
+				position : absolute;
+				top : 20px;
+				left : 20px;
+			}
+			*/
+
+			#kiwi {
+				position : absolute;
+				bottom : 0px;
+				left : 50%;
+				top : 50%;
+				margin-left : -170px;
+				margin-top : -146px;
+				z-index : 10;
+			}
+
+			#clickPanel {
+				width : 340px;
+				height : 300px;
+				position : absolute;
+				bottom : 0px;
+				left : 50%;
+				top : 50%;
+				margin-left : -170px;
+				margin-top : -146px;
+				background : transparent;
+				z-index : 20;
+			}
+
+			h1 {
+				position : absolute;
+				bottom : 20px;
+				font-family : "Helvetica Neue", Helvetica, Arial;
+				font-weight: 200;
+				text-align : center;
+				font-style: italic;
+				width : 100%;
+				color : #6d6e71;
+			}
+
+			h1 img {
+				position : relative;
+				top : 10px;
+			}
+
+			#kiwi img {
+				display : none;
+			}
+		</style>
+		<meta name="viewport" content="width=device-width,height=device-height,minimum-scale=1, maximum-scale=1" />
+		<script src="scripts/jquery-2.1.1.min.js"></script>
+		
+		<script>
+
+			var swapImage = function(){
+			  	var next = $('#kiwi img:visible').next().length > 0 
+			  			 ? $('#kiwi img:visible').next()
+			  			 : $('#kiwi img:first');
+		    	$('#kiwi img:visible').hide();
+		    	next.show();
+			}
+
+			$(document).ready(function() {
+
+				$('body').click(function() {
+					if(base > 40) {
+						cI++;
+						$('h1 span').text(text[cI]);
+						base -= step;
+						clearInterval(timer);
+						timer = setInterval(swapImage, base);
+					}  else {
+						$("#kiwi").animate({
+							left: "+="+$(document).width()
+						}, 600, function() {
+							$('*').click();
+							clearInterval(timer);
+							$('#kiwi').remove();
+						});
+					}
+				});
+
+
+				var base = 120, step = 25, cI = 0;
+				var text = new Array('Coming Soon...', 'As we said, we are coming soon !', 'Whatever, who needs a website these days ?', 'Stop clicking on us !','Ok, see you then...'); 
+				var timer = setInterval(swapImage, base);
+
+				$('h1 span').text(text[cI]);
+			});
+		</script>
+	</head>
+	<body>
+		<h1>
+			<img class="logo" src="resources/logo.png" /> 
+			<span></span>
+		</h1>
+		<div id="clickPanel"> </div>
+		<div id="kiwi">
+			<img src="resources/state-1.png" />
+			<img src="resources/state-2.png" />
+			<img src="resources/state-3.png" />
+			<img src="resources/state-4.png" />
+			<img src="resources/state-5.png" />
+			<img src="resources/state-6.png" />
+		</div>
+	</body>
+</html>
